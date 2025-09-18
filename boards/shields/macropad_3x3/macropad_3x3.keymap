@@ -2,6 +2,8 @@
  * Copyright (c) 2020 The ZMK Contributors
  *
  * SPDX-License-Identifier: MIT
+ */ *
+ * SPDX-License-Identifier: MIT
  */
 
 #include <behaviors.dtsi>
@@ -15,18 +17,25 @@
         compatible = "zmk,combos";
         combo_nav {
             timeout-ms = <50>;
-            key-positions = <1 2 3>;
+            key-positions = <0 1 2>;  // top row (1 2 3)
             bindings = <&tog 1>;
         };
         combo_hotkey {
             timeout-ms = <50>;
-            key-positions = <4 5 6>;  // middle column keys
-            bindings = <&tog 2>;       // momentarily activate layer 2
+            key-positions = <3 4 5>;  // middle row (4 5 6)
+            bindings = <&tog 2>;
         };
         combo_media {
             timeout-ms = <50>;
-            key-positions = <7 8 9>;  // top row keys (7 8 9)
-            bindings = <&tog 3>;      // toggle layer 3 (media layer)
+            key-positions = <6 7 8>;  // bottom row (7 8 9)
+            bindings = <&tog 3>;
+        };
+        combo_return {
+            timeout-ms = <150>;
+            key-positions = <3 4 5>;  // middle row (4 5 6)
+            bindings = <&to 0>;   // return to default layer
+            require-prior-idle-ms = <200>;
+            global-quick-tap-ms = <200>;
         };
     };
 
@@ -35,15 +44,17 @@
 
         default_layer {
 // -------------------
-// | 7      |  8  |  9  |
-// | 4      |  5  |  6  |
 // | 1      |  2  |  3  |
+// | 4      |  5  |  6  |
+// | 7      |  8  |  9  |
 // -------------------
             bindings = <
-    &kp N7 &kp N8 &kp N9
-    &kp N4 &kp N5 &kp N6
     &kp N1 &kp N2 &kp N3
+    &kp N4 &kp N5 &kp N6
+    &kp N7 &kp N8 &kp N9
             >;
+        };
+
         };
 
         nav_layer {
