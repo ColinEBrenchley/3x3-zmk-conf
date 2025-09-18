@@ -61,14 +61,14 @@ illustrator_layer {
 
         hotkey_layer {
 // -----------------------------
-// | Ctrl+X | Ctrl+S  | Ctrl+A   |
-// | Ctrl+V | Ctrl+Y  | C-S-N    |
-// | Ctrl+C | Ctrl+Z  | C-S-T    |
+// | Ctrl+X | Ctrl+Z  | Ctrl+A   |
+// | Ctrl+V | Ctrl+S  | C-S-N    |
+// | Ctrl+C | Ctrl+Y  | C-S-T    |
 // -----------------------------
             bindings = <
-    &kp LC(X)     &kp LC(S)     &kp LC(A)
-    &kp LC(V)     &kp LC(Y)     &kp LC(LS(N))
-    &kp LC(C)     &kp LC(Z)     &kp LC(LS(T))
+    &kp LC(X)     &kp LC(Z)     &kp LC(A)
+    &kp LC(V)     &kp LC(S)     &kp LC(LS(N))
+    &kp LC(C)     &kp LC(Y)     &kp LC(LS(T))
             >;
         };
 
