@@ -7,6 +7,7 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
+    //Test number 1
     chosen {
         zmk,kscan = &kscan0;
     };
