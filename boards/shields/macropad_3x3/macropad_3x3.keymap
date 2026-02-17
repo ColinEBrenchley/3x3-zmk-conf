@@ -12,23 +12,44 @@
 
 / {
     combos {
-        compatible = "zmk,combos";
-        combo_illustrator {
-            timeout-ms = <50>;
-            key-positions = <2 5 8>;  // physical top row (3 6 9)
-            bindings = <&tog 1>;
+    compatible = "zmk,combos";
+    combo_illustrator {
+        timeout-ms = <50>;
+        key-positions = <2 5 8>;
+        bindings = <&to 1>;
+        layers = <0>;        // only fires from default layer
         };
-        combo_hotkey {
-            timeout-ms = <50>;
-            key-positions = <1 4 7>;  // physical middle row (2 5 8)
-            bindings = <&tog 2>;
-        };
-        combo_media {
-            timeout-ms = <50>;
-            key-positions = <0 3 6>;  // physical bottom row (1 4 7)
-            bindings = <&tog 3>;
-        };
+    combo_illustrator_off {
+        timeout-ms = <50>;
+        key-positions = <2 5 8>;
+        bindings = <&to 0>;
+        layers = <1>;        // only fires from illustrator layer
     };
+    combo_hotkey {
+        timeout-ms = <50>;
+        key-positions = <1 4 7>;
+        bindings = <&to 2>;
+        layers = <0>;
+    };
+    combo_hotkey_off {
+        timeout-ms = <50>;
+        key-positions = <1 4 7>;
+        bindings = <&to 0>;
+        layers = <2>;
+    };
+    combo_media {
+        timeout-ms = <50>;
+        key-positions = <0 3 6>;
+        bindings = <&to 3>;
+        layers = <0>;
+    };
+    combo_media_off {
+        timeout-ms = <50>;
+        key-positions = <0 3 6>;
+        bindings = <&to 0>;
+        layers = <3>;
+    };
+};
 
     keymap {
         compatible = "zmk,keymap";
@@ -63,25 +84,25 @@ illustrator_layer {
 // -----------------------------
 // | Ctrl+X | Ctrl+Z  | Ctrl+A   |
 // | Ctrl+V | Ctrl+S  | C-S-N    |
-// | Ctrl+C | Ctrl+Y  | C-S-T    |
+// | Ctrl+C | Ctrl+Y  | Firmware_RST|
 // -----------------------------
             bindings = <
     &kp LC(X)     &kp LC(Z)     &kp LC(A)
     &kp LC(V)     &kp LC(S)     &kp LC(LS(N))
-    &kp LC(C)     &kp LC(Y)     &kp LC(LS(T))
+    &kp LC(C)     &kp LC(Y)     &bootloader
             >;
         };
 
         media_layer {
 // -----------------------------
-// | Vol Dn  | Next       | Firmware_RST   |
+// | Vol Dn  | Next       | PiP   |
 // | PP      | Mute       | BRI Dn |
 // | Vol Up  | Prev       | BRI Up |
 // -----------------------------
             bindings = <
-    &kp C_VOL_DN &kp C_PREV   &bootloader
-    &kp C_MUTE   &kp C_PP     &kp C_BRI_DN
-    &kp C_VOL_UP &kp C_NEXT   &kp C_BRI_UP
+    &kp C_VOL_DN &kp C_PREV   &kp LA(P)
+    &kp C_MUTE   &kp C_PP     &kp LC(LG(LA(N2)))
+    &kp C_VOL_UP &kp C_NEXT   &kp LC(LG(LA(N3)))
             >;
         };
     };
