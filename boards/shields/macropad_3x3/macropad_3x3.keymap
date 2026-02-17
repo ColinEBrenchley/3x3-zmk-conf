@@ -7,43 +7,102 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/ext_power.h>
 
 / {
     combos {
-        compatible = "zmk,combos";
-        combo_nav {
-            timeout-ms = <50>;
-            key-positions = <1 2 3>;
-            bindings = <&tog 1>;
+    compatible = "zmk,combos";
+    combo_illustrator {
+        timeout-ms = <50>;
+        key-positions = <2 5 8>;
+        bindings = <&to 1>;
+        layers = <0>;        // only fires from default layer
         };
+    combo_illustrator_off {
+        timeout-ms = <50>;
+        key-positions = <2 5 8>;
+        bindings = <&to 0>;
+        layers = <1>;        // only fires from illustrator layer
     };
+    combo_hotkey {
+        timeout-ms = <50>;
+        key-positions = <1 4 7>;
+        bindings = <&to 2>;
+        layers = <0>;
+    };
+    combo_hotkey_off {
+        timeout-ms = <50>;
+        key-positions = <1 4 7>;
+        bindings = <&to 0>;
+        layers = <2>;
+    };
+    combo_media {
+        timeout-ms = <50>;
+        key-positions = <0 3 6>;
+        bindings = <&to 3>;
+        layers = <0>;
+    };
+    combo_media_off {
+        timeout-ms = <50>;
+        key-positions = <0 3 6>;
+        bindings = <&to 0>;
+        layers = <3>;
+    };
+};
 
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
 // -------------------
-// | 7      |  8  |  9  |
-// | 4      |  5  |  6  |
-// | 1      |  2  |  3  |
+// | 3      |  6  |  9  |
+// | 2      |  5  |  8  |
+// | 1      |  4  |  7  |
 // -------------------
             bindings = <
-    &kp N7 &kp N8 &kp N9
-    &kp N4 &kp N5 &kp N6
-    &kp N1 &kp N2 &kp N3
+    &kp N7 &kp N4 &kp N1
+    &kp N8 &kp N5 &kp N2
+    &kp N9 &kp N6 &kp N3
             >;
         };
 
-        nav_layer {
-// -----------------------
-// | BTNXT |  HOME  |  PGUP  |
-// | BTPRV |  END   |  PGDN  |
-// | BTCLR |  _     |  _     |
-// -----------------------
+illustrator_layer {
+    // -----------------------------------------
+    // | BRING_FRONT | BRING_FWD  | DESELECT  |
+    // | GROUP       | COPY_PLACE | GUIDES    |
+    // | SEND_BACK   | SEND_BACK  | UNGROUP   |
+    // -----------------------------------------
             bindings = <
-    &bt BT_NXT &kp HOME &kp PG_UP
-    &bt BT_PRV &kp END  &kp PG_DN
-    &bt BT_CLR &trans   &trans
+    &kp LC(LS(RBKT))  &kp LC(LA(RBKT))  &kp LC(LS(A))
+    &kp LC(LS(G))     &kp LC(LA(C))     &kp LC(SEMICOLON)
+    &kp LC(LS(LBKT))  &kp LC(LA(LBKT))  &kp LC(LS(G))
+        >;
+    };
+
+        hotkey_layer {
+// -----------------------------
+// | Ctrl+X | Ctrl+Z  | Ctrl+A   |
+// | Ctrl+V | Ctrl+S  | C-S-N    |
+// | Ctrl+C | Ctrl+Y  | Firmware_RST|
+// -----------------------------
+            bindings = <
+    &kp LC(X)     &kp LC(Z)     &kp LC(A)
+    &kp LC(V)     &kp LC(S)     &kp LC(LS(N))
+    &kp LC(C)     &kp LC(Y)     &bootloader
+            >;
+        };
+
+        media_layer {
+// -----------------------------
+// | Vol Dn  | Next       | PiP   |
+// | PP      | Mute       | BRI Dn |
+// | Vol Up  | Prev       | BRI Up |
+// -----------------------------
+            bindings = <
+    &kp C_VOL_DN &kp C_PREV   &kp LA(P)
+    &kp C_MUTE   &kp C_PP     &kp LC(LG(LA(N2)))
+    &kp C_VOL_UP &kp C_NEXT   &kp LC(LG(LA(N3)))
             >;
         };
     };
